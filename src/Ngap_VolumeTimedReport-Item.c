@@ -80,7 +80,7 @@ memb_Ngap_usageCountUL_constraint_1(const asn_TYPE_descriptor_t *td, const void 
 		return -1;
 	}
 	
-	if((value >= 0 && value <= 18446744073709551615)) {
+	if((value >= 0 && value <= 18446744073709551615U)) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
@@ -111,7 +111,7 @@ memb_Ngap_usageCountDL_constraint_1(const asn_TYPE_descriptor_t *td, const void 
 		return -1;
 	}
 	
-	if((value >= 0 && value <= 18446744073709551615)) {
+	if((value >= 0 && value <= 18446744073709551615U)) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
@@ -139,18 +139,18 @@ static asn_per_constraints_t asn_PER_memb_Ngap_endTimeStamp_constr_3 CC_NOTUSED 
 	0, 0	/* No PER value map */
 };
 static asn_oer_constraints_t asn_OER_memb_Ngap_usageCountUL_constr_4 CC_NOTUSED = {
-	{ 8, 1 }	/* (0..18446744073709551615) */,
+	{ 8, 1 }	/* (0..18446744073709551615U) */,
 	-1};
 static asn_per_constraints_t asn_PER_memb_Ngap_usageCountUL_constr_4 CC_NOTUSED = {
-	{ APC_CONSTRAINED,	 64, -1,  0,  18446744073709551615 }	/* (0..18446744073709551615) */,
+	{ APC_CONSTRAINED,	 64, -1,  0,  18446744073709551615U }	/* (0..18446744073709551615U) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
 static asn_oer_constraints_t asn_OER_memb_Ngap_usageCountDL_constr_5 CC_NOTUSED = {
-	{ 8, 1 }	/* (0..18446744073709551615) */,
+	{ 8, 1 }	/* (0..18446744073709551615U) */,
 	-1};
 static asn_per_constraints_t asn_PER_memb_Ngap_usageCountDL_constr_5 CC_NOTUSED = {
-	{ APC_CONSTRAINED,	 64, -1,  0,  18446744073709551615 }	/* (0..18446744073709551615) */,
+	{ APC_CONSTRAINED,	 64, -1,  0,  18446744073709551615U }	/* (0..18446744073709551615U) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
@@ -194,7 +194,7 @@ asn_TYPE_member_t asn_MBR_Ngap_VolumeTimedReport_Item_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct Ngap_VolumeTimedReport_Item, iE_Extensions),
 		(ASN_TAG_CLASS_CONTEXT | (4 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_Ngap_ProtocolExtensionContainer_175P188,
+		&asn_DEF_Ngap_ProtocolExtensionContainer_175P284,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
