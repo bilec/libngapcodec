@@ -4,7 +4,7 @@ VERSION=16.4.0
 
 NAME=ngapcodec
 LIBNAME=lib$(NAME)
-PREFIX?=/usr/local
+PREFIX?=/usr
 
 LIBS += -lm
 CFLAGS += $(ASN_MODULE_CFLAGS) -DASN_PDU_COLLECTION -I. -Iinclude/asn1c
