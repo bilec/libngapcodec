@@ -7,10 +7,10 @@ import os
 import re
 import sys
 import ftplib
-import StringIO
+import io
 import subprocess
 import tempfile
-import urllib
+import urllib.request
 import zipfile
 
 class Ts3gpp(object):
@@ -149,8 +149,8 @@ class Ts3gpp(object):
             self.number(),
             Ts3gpp.string_to_file_version(version)
         )
-        print "downloading " + url
-        handle = urllib.urlopen(url)
+        print("downloading " + url)
+        handle = urllib.request.urlopen(url)
         data = handle.read()
         handle.close()
         return data
@@ -158,19 +158,19 @@ class Ts3gpp(object):
     @staticmethod
     def unzip_and_convert_to_text(zipdata):
         """ unzip archive, and convert word document to text """
-        print "unarchive zip"
-        zip_file = zipfile.ZipFile(StringIO.StringIO(zipdata))
+        print("unarchive zip")
+        zip_file = zipfile.ZipFile(io.BytesIO(zipdata))
         docname = None
         for name in zip_file.namelist():
             if name[-4:] == ".doc":
                 docname = name
         if docname is None:
             raise RuntimeError("No .doc found")
-        print "found document : " + docname
+        print("found document : " + docname)
         data = zip_file.read(docname)
         with tempfile.NamedTemporaryFile(suffix=".doc", delete=False) as tmp_doc_file:
             command = "soffice --headless --cat {}".format(tmp_doc_file.name)
-            print "converting document to text using " + command
+            print("converting document to text using " + command)
             tmp_doc_file.write(data)
             tmp_doc_file.flush()
             text = subprocess.check_output(command.split(" "))
@@ -182,7 +182,7 @@ class Ts3gpp(object):
             asn.1 section must be delimited by ASN1START, ASN1STOP
         """
 
-        print "extracting asn.1 specs"
+        print("extracting asn.1 specs")
 
         class State(enum.Enum):
             TEXT = 0
@@ -199,6 +199,8 @@ class Ts3gpp(object):
         title = None
         file_output = None
 
+        text = text.decode("utf-8")
+
         for line in text.split("\n"):
             if state == State.TEXT:
                 res = title_search.match(line)
@@ -209,7 +211,7 @@ class Ts3gpp(object):
                 if res is not None:
                     filename = title + ".asn1"
                     file_output = open(output_dir + filename, "w")
-                    print filename
+                    print(filename)
                     file_output.write(line + "\n")
                     state = State.ASN
             elif state == State.ASN:
@@ -241,12 +243,12 @@ def versions_to_str(versions):
 
 def get_version(ts):
     versions = ts.get_available_version_from_3gpp()
-    print "Available versions :"
-    print ""
-    print versions_to_str(versions)
-    print ""
+    print("Available versions :")
+    print("")
+    print(versions_to_str(versions))
+    print("")
     version = sorted(versions.keys())[-1]
-    print "using last one : " + version
+    print("using last one : " + version)
     return version
 
 # === main ===
